@@ -1,10 +1,36 @@
-﻿namespace Homomorphic_Encryption
+﻿using System;
+using System.Numerics;
+
+namespace Homomorphic_Encryption
 {
     internal static class Program
     {
+        private static BigInteger _privateKey;
+        private static BigInteger[] _publicKey;
+
         public static void Main(string[] args)
         {
-            
+        }
+
+        private static void Keygen()
+        {
+            var rnd = new Random();
+            var rand = new byte[16];
+            _publicKey = new BigInteger[100];
+
+            do
+            {
+                rnd.NextBytes(rand);
+                _privateKey = new BigInteger(rand);
+                _privateKey = BigInteger.Abs(_privateKey);
+            } while (BigInteger.GreatestCommonDivisor(_privateKey, 1000000) != 1);
+
+            for (var i = 0; i < 100; i++)
+            {
+                rnd.NextBytes(rand);
+                _publicKey[i] = new BigInteger(rand);
+                _publicKey[i] = BigInteger.Abs(_publicKey[i]) * _privateKey + 1000000 * rnd.Next(10, 100);
+            }
         }
     }
 }
