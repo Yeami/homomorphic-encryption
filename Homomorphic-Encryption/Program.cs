@@ -57,5 +57,13 @@ namespace Homomorphic_Encryption
 
             return BigInteger.Remainder(m, 1000000).ToString();
         }
+        
+        private static string Summation(string first, string second)
+        {
+            BigInteger.TryParse(first, out var a);
+            BigInteger.TryParse(second, out var b);
+
+            return (a + b).ToString();
+        }
     }
 }
