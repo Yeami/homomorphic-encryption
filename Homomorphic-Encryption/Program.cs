@@ -65,5 +65,13 @@ namespace Homomorphic_Encryption
 
             return (a + b).ToString();
         }
+        
+        private static string Multiplication(string first, string second)
+        {
+            BigInteger.TryParse(first, out var a);
+            BigInteger.TryParse(second, out var b);
+
+            return (a * b).ToString();
+        }
     }
 }
