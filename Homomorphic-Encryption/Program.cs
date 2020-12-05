@@ -7,9 +7,29 @@ namespace Homomorphic_Encryption
     {
         private static BigInteger _privateKey;
         private static BigInteger[] _publicKey;
+        
+        private const string Value1 = "5";
+        private const string Value2 = "3";
 
         public static void Main(string[] args)
         {
+            Console.WriteLine("Initial data: " + Value1 + ", " + Value2);
+            Keygen();
+
+            var first = Encrypt(Value1);
+            var second = Encrypt(Value2);
+            
+            Console.WriteLine("Encrypted data: " + first + ", " + second);
+
+            var multiplication = Multiplication(first, second);
+            Console.WriteLine("Multiplication: " + multiplication);
+            Console.WriteLine("Decrypted multiplication: " + Decrypt(multiplication));
+            
+            var summation = Summation(first, second);
+            Console.WriteLine("Summation: " + summation);
+            Console.WriteLine("Decrypted summation: " + Decrypt(summation));
+            
+            Console.WriteLine("Decrypted data: " + Decrypt(first) + ", " + Decrypt(second));
         }
 
         private static void Keygen()
