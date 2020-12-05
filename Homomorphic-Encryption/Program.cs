@@ -49,5 +49,13 @@ namespace Homomorphic_Encryption
 
             return (e + t).ToString();
         }
+        
+        private static string Decrypt(string value)
+        {
+            BigInteger.TryParse(value, out var e);
+            var m = BigInteger.Remainder(e, _privateKey);
+
+            return BigInteger.Remainder(m, 1000000).ToString();
+        }
     }
 }
