@@ -32,5 +32,22 @@ namespace Homomorphic_Encryption
                 _publicKey[i] = BigInteger.Abs(_publicKey[i]) * _privateKey + 1000000 * rnd.Next(10, 100);
             }
         }
+        
+        private static string Encrypt(string value)
+        {
+            BigInteger.TryParse(value, out var e);
+            var t = new BigInteger(0);
+            var rand = new Random();
+
+            for (var i = 0; i < 100; i++)
+            {
+                if (rand.Next(2) == 1)
+                {
+                    t += _publicKey[i];
+                }
+            }
+
+            return (e + t).ToString();
+        }
     }
 }
